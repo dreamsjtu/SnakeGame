@@ -1,6 +1,7 @@
-package snakeGame.model;
+package model;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Snake {
@@ -11,7 +12,7 @@ public class Snake {
 	/**
 	 * Current coordinates of the snake's body
 	 */
-	private List<Point> snakeBodyEleCoords;
+	private List<Point> snakeBodyEleCoords = new ArrayList<>();
 	/**
 	 * Body length of current snake
 	 */

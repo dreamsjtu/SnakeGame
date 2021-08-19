@@ -1,10 +1,10 @@
-package snakeGame.control;
+package control;
 
 import java.awt.Point;
 
-import snakeGame.model.Board;
-import snakeGame.model.Direction;
-import snakeGame.model.Snake;
+import model.Board;
+import model.Direction;
+import model.Snake;
 
 public class Controller {
 	private Board board;

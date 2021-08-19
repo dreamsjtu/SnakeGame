@@ -1,4 +1,4 @@
-package snakeGame.model;
+package model;
 
 public class Tile {
 	private boolean hasFruit;

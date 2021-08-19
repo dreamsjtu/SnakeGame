@@ -1,4 +1,4 @@
-package snakeGame.model;
+package model;
 
 import java.awt.Point;
 import java.util.List;
@@ -32,11 +32,18 @@ public class Board extends Observable{
 		this.rows = rows;
 		this.cols = cols;
 		this.tiles = new Tile[rows][cols];
+		for(int i=0;i<rows;i++) {
+			for(int j=0;j<cols;j++) {
+				this.tiles[i][j]= new Tile();
+			}
+		}
 		makeNorthWall();
 		makeSouthWall();
 		makeWestWall();
 		makeEastWall();
 		makeFruit();
+		setChanged();
+		notifyObservers();
 		Snake s = new Snake((int)rows/2,(int)cols/2,snakeBodyLength,Direction.Up);
 	}
 	/**

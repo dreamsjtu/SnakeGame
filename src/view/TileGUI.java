@@ -1,4 +1,4 @@
-package snakeGame.view;
+package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -18,6 +18,6 @@ public class TileGUI{
 	
 	public void paint(Graphics g) {
 		g.setColor(Color.BLACK);
-		g.drawRect(loc.x, loc.y, width, height);
+		g.drawRect(loc.x*width, loc.y*height, width, height);
 	}
 }
