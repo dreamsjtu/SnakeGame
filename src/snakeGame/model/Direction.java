@@ -1,4 +1,4 @@
-package model;
+package snakeGame.model;
 
 public enum Direction {
 	Up,

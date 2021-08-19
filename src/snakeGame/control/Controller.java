@@ -1,10 +1,10 @@
-package control;
+package snakeGame.control;
 
 import java.awt.Point;
 
-import model.Board;
-import model.Direction;
-import model.Snake;
+import snakeGame.model.Board;
+import snakeGame.model.Direction;
+import snakeGame.model.Snake;
 
 public class Controller {
 	private Board board;
@@ -42,7 +42,6 @@ public class Controller {
 				tick(oldHeadX, oldHeadY, oldHeadX+1,oldHeadY );
 				break;
 			}
-			
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {

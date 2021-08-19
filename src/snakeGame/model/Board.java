@@ -1,10 +1,12 @@
-package model;
+package snakeGame.model;
 
 import java.awt.Point;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Random;
 
-public class Board {
+public class Board extends Observable{
 	/**
 	 * Number of rows
 	 */
@@ -89,4 +91,17 @@ public class Board {
 	public Point getFruit() {
 		return this.fruit;
 	}
+	/**
+	 * Get the rows of tiles
+	 */
+	public int getRows() {
+		return this.rows;
+	}
+	/**
+	 * Get the cols of tiles
+	 */
+	public int getCols() {
+		return this.cols;
+	}
 }
+
