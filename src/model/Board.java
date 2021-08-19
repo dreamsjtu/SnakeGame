@@ -43,7 +43,7 @@ public class Board {
 	public void makeFruit() {
 		int randomRow = (new Random()).nextInt(rows);
 		int randomCol = (new Random()).nextInt(cols);
-		this.fruit = new Point(randomRow,randomCol);
+		this.fruit = new Point(randomCol,randomRow);
 	}
 	/**
 	 * Make the north wall, set tile on the north boundary of the board to hasNorthWall
@@ -77,5 +77,16 @@ public class Board {
 			tiles[i][cols-1].setHasEastWall(true);
 		}
 	}
-	
+	/**
+	 * Get the tiles of board
+	 */
+	public Tile[][] getTiles() {
+		return this.tiles;
+	}
+	/**
+	 * Get the coord of fruit
+	 */
+	public Point getFruit() {
+		return this.fruit;
+	}
 }

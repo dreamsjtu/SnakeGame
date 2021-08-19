@@ -37,28 +37,28 @@ public class Tile {
 	 * return if current tile has north wall.
 	 * @return true if current tile has north wall, false if not
 	 */
-	public boolean isHasNorthWall() {
+	private boolean isHasNorthWall() {
 		return hasNorthWall;
 	}
 	/**
 	 * return if current tile has south wall.
 	 * @return true if current tile has south wall, false if not
 	 */
-	public boolean isHasSouthWall() {
+	private boolean isHasSouthWall() {
 		return hasSouthWall;
 	}
 	/**
 	 * return if current tile has west wall.
 	 * @return true if current tile has west wall, false if not
 	 */
-	public boolean isHasWestWall() {
+	private boolean isHasWestWall() {
 		return hasWestWall;
 	}
 	/**
 	 * return if current tile has east wall.
 	 * @return true if current tile has east wall, false if not
 	 */
-	public boolean isHasEastWall() {
+	private boolean isHasEastWall() {
 		return hasEastWall;
 	}
 	/**
@@ -102,6 +102,23 @@ public class Tile {
 	 */
 	public void setHasEastWall(boolean hasEastWall) {
 		this.hasEastWall = hasEastWall;
+	}
+	/**
+	 * check if there is a wall on given direction
+	 * @return ture if there is a wall, otherwise false
+	 */
+	public boolean hasWall(Direction direction) {
+		switch(direction) {
+		case Up:
+			return this.isHasNorthWall();
+		case Down:
+			return this.isHasSouthWall();
+		case Left:
+			return this.isHasWestWall();
+		case Right:
+			return this.isHasEastWall();
+		}
+		return false;
 	}
 	
 }
