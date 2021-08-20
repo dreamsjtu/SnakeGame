@@ -1,12 +1,14 @@
 package control;
 
 import java.awt.Point;
+import java.beans.EventHandler;
+import java.util.Observable;
 
 import model.Board;
 import model.Direction;
 import model.Snake;
 
-public class Controller {
+public class Controller extends Observable {
 	private Board board;
 	private Snake snake;
 	private boolean isGameCompleted;
@@ -17,17 +19,18 @@ public class Controller {
 	 * @param board
 	 * @param snake
 	 */
-	public Controller(Board board, Snake snake) {
+	public Controller(Board board) {
 		this.board = board;
-		this.snake = snake;
+		this.snake = board.getSnake();
+		this.currentDirection = snake.getCurrentDirection();
 	}
 	/**
 	 * Run the game, until game finished.
 	 */
 	public void run() {
 		while(!isGameCompleted) {
-			int oldHeadX = snake.getSnakeHeadLocation().x;
-			int oldHeadY = snake.getSnakeHeadLocation().y;
+			int oldHeadX = snake.getSnakeHeadCoord().x;
+			int oldHeadY = snake.getSnakeHeadCoord().y;
 			switch(this.currentDirection) {
 			case Up:
 				tick(oldHeadX, oldHeadY, oldHeadX,oldHeadY-1 );
@@ -42,8 +45,10 @@ public class Controller {
 				tick(oldHeadX, oldHeadY, oldHeadX+1,oldHeadY );
 				break;
 			}
+			setChanged();
+			notifyObservers();
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				System.out.println("Failed to pause");
 				e.printStackTrace();
@@ -73,14 +78,30 @@ public class Controller {
 				//set the location of snake head
 				snake.setSnakeHeadCoord(new Point(newHeadX,newHeadY));
 				//check if there is a fruit on the new head location.
-				//if there is nothing on this location,  remove the tail element from list, otherwise do nothing.
+				//if there is nothing on this location,  remove the tail element from list, otherwise make another fruit.
 				if(newHeadX!=board.getFruit().x||newHeadY!=board.getFruit().y) {
 					snake.removeBodyElemCoordEnd();
+				}else {
+					board.makeFruit();
 				}
-		
 	}
-	
-	private void setCurrentDirection(Direction direction) {
+	public void setCurrentDirection(Direction direction) {
+		switch(this.currentDirection) {
+		case Up:
+			if(direction==Direction.Down) return;
+			break; //TODO don't understand why break still necessary here.
+		case Down:
+			if(direction==Direction.Up) return;
+			break;
+		case Left:
+			if(direction==Direction.Right) return;
+			break;
+		case Right:
+			if(direction==Direction.Left) return;
+			break;
+		default:
+			break;
+		}
 		this.currentDirection = direction;
 	}
 }

@@ -24,6 +24,10 @@ public class Board extends Observable{
 	 */
 	private Point fruit;
 	/**
+	 * The snake
+	 */
+	private Snake snake;
+	/**
 	 * Constructor for Board, take rows and columns as parameters
 	 * @param rows how many rows in the board
 	 * @param cols how many columns in the board
@@ -41,10 +45,10 @@ public class Board extends Observable{
 		makeSouthWall();
 		makeWestWall();
 		makeEastWall();
+		this.snake = new Snake((int)rows/2,(int)cols/2,snakeBodyLength,Direction.Up);
 		makeFruit();
 		setChanged();
 		notifyObservers();
-		Snake s = new Snake((int)rows/2,(int)cols/2,snakeBodyLength,Direction.Up);
 	}
 	/**
 	 * Make a fruit at random location.
@@ -52,6 +56,13 @@ public class Board extends Observable{
 	public void makeFruit() {
 		int randomRow = (new Random()).nextInt(rows);
 		int randomCol = (new Random()).nextInt(cols);
+		//fruit couldn't overlap with snake
+		for(int i=0;i<this.snake.getSnakeBodyEleCoords().size();i++) {
+			if(this.snake.getSnakeBodyEleCoords().get(i).x==randomCol&&this.snake.getSnakeBodyEleCoords().get(i).y==randomRow) {
+				makeFruit();
+				return;
+			}
+		}
 		this.fruit = new Point(randomCol,randomRow);
 	}
 	/**
@@ -109,6 +120,13 @@ public class Board extends Observable{
 	 */
 	public int getCols() {
 		return this.cols;
+	}
+	/**
+	 * Get the snake
+	 * @return the snake
+	 */
+	public Snake getSnake() {
+		return this.snake;
 	}
 }
 

@@ -85,13 +85,6 @@ public class Snake {
 		this.snakeBodyEleCoords.remove(snakeBodyEleCoords.size()-1);
 	}
 	/**
-	 * get the coordinate of snake head
-	 * @return coordinate of snake head
-	 */
-	public Point getSnakeHeadLocation() {
-		return snakeHeadCoord;
-	}
-	/**
 	 * get the snake body elements' coordinates.
 	 * @return a List of Points
 	 */
@@ -118,5 +111,11 @@ public class Snake {
 	 */
 	public void setSnakeHeadCoord(Point loc) {
 		this.snakeHeadCoord = loc;
+	}
+	/**
+	 * return the coordinate of snake head
+	 */
+	public Point getSnakeHeadCoord() {
+		return this.snakeHeadCoord;
 	}
 }
