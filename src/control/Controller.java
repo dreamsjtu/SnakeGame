@@ -54,6 +54,8 @@ public class Controller extends Observable {
 				e.printStackTrace();
 			}
 		}
+		setChanged();
+		notifyObservers();
 	}
 	/**
 	 * A tick for the game.
@@ -103,5 +105,8 @@ public class Controller extends Observable {
 			break;
 		}
 		this.currentDirection = direction;
+	}
+	public boolean isGameCompleted() {
+		return isGameCompleted;
 	}
 }

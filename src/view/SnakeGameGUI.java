@@ -35,7 +35,7 @@ public class SnakeGameGUI extends JFrame{
 		this.setVisible(true);
 		this.board = board;
 		this.control = control;
-		tileWidth = WIDTH/(board.getCols()+1);
+		tileWidth = WIDTH/(board.getCols());
 		tileHeight = HEIGHT/(board.getRows()+1);
 		this.setSize(WIDTH, HEIGHT);
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
