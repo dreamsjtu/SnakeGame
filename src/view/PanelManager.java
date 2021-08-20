@@ -56,22 +56,22 @@ public class PanelManager extends JPanel implements Observer, KeyListener {
 		switch (key) {
 		case KeyEvent.VK_W:
 		case KeyEvent.VK_UP:
-			control.setCurrentDirection(Direction.Up);
+			control.addCurrentDirection(Direction.Up);
 			System.out.println("Up");
 			break;
 		case KeyEvent.VK_S:
 		case KeyEvent.VK_DOWN:
-			control.setCurrentDirection(Direction.Down);
+			control.addCurrentDirection(Direction.Down);
 			System.out.println("Down");
 			break;
 		case KeyEvent.VK_A:
 		case KeyEvent.VK_LEFT:
-			control.setCurrentDirection(Direction.Left);
+			control.addCurrentDirection(Direction.Left);
 			System.out.println("Left");
 			break;
 		case KeyEvent.VK_D:
 		case KeyEvent.VK_RIGHT:
-			control.setCurrentDirection(Direction.Right);
+			control.addCurrentDirection(Direction.Right);
 			System.out.println("Right");
 			break;
 		default:

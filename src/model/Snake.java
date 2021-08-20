@@ -69,7 +69,6 @@ public class Snake {
 	public void setDirection(Direction direction) {
 		this.previousDirection = this.currentDirection;
 		this.currentDirection = direction;
-		
 	}
 	/**
 	 * Add a new body element coordinate to beginning of the List.

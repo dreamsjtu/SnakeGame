@@ -1,7 +1,8 @@
 package control;
 
 import java.awt.Point;
-import java.beans.EventHandler;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
 import model.Board;
@@ -13,6 +14,7 @@ public class Controller extends Observable {
 	private Snake snake;
 	private boolean isGameCompleted;
 	private Direction currentDirection;
+	private List<Direction> directions = new ArrayList<>();
 
 	/**
 	 * Game controller, run the game, observe changes in GUI.
@@ -28,9 +30,13 @@ public class Controller extends Observable {
 	 * Run the game, until game finished.
 	 */
 	public void run() {
+		this.directions.add(currentDirection);
 		while(!isGameCompleted) {
 			int oldHeadX = snake.getSnakeHeadCoord().x;
 			int oldHeadY = snake.getSnakeHeadCoord().y;
+			if(this.directions.size()>0) {
+			this.currentDirection = this.directions.remove(0);
+			}
 			switch(this.currentDirection) {
 			case Up:
 				tick(oldHeadX, oldHeadY, oldHeadX,oldHeadY-1 );
@@ -54,6 +60,7 @@ public class Controller extends Observable {
 				e.printStackTrace();
 			}
 		}
+		//game over, show option pane
 		setChanged();
 		notifyObservers();
 	}
@@ -87,8 +94,9 @@ public class Controller extends Observable {
 					board.makeFruit();
 				}
 	}
-	public void setCurrentDirection(Direction direction) {
-		switch(this.currentDirection) {
+	public void addCurrentDirection(Direction direction) {
+		if(this.directions.size()!=0) {
+		switch(this.directions.get(this.directions.size()-1)) {
 		case Up:
 			if(direction==Direction.Down) return;
 			break; //TODO don't understand why break still necessary here.
@@ -104,7 +112,8 @@ public class Controller extends Observable {
 		default:
 			break;
 		}
-		this.currentDirection = direction;
+		}
+		this.directions.add(direction);
 	}
 	public boolean isGameCompleted() {
 		return isGameCompleted;
