@@ -1,11 +1,10 @@
 package model;
 
 import java.awt.Point;
-import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
 import java.util.Random;
 
+@SuppressWarnings("deprecation")
 public class Board extends Observable{
 	/**
 	 * Number of rows
@@ -31,6 +30,7 @@ public class Board extends Observable{
 	 * Constructor for Board, take rows and columns as parameters
 	 * @param rows how many rows in the board
 	 * @param cols how many columns in the board
+	 * @param snakeBodyLength the length of the snake body.
 	 */
 	public Board(int rows,int cols, int snakeBodyLength) {
 		this.rows = rows;
@@ -41,24 +41,24 @@ public class Board extends Observable{
 				this.tiles[i][j]= new Tile();
 			}
 		}
+		//set the walls
 		makeNorthWall();
 		makeSouthWall();
 		makeWestWall();
 		makeEastWall();
+		//create the snake.
 		this.snake = new Snake((int)rows/2,(int)cols/2,snakeBodyLength,Direction.Up);
 		makeFruit();
-		setChanged();
-		notifyObservers();
 	}
 	/**
-	 * Make a fruit at random location.
+	 * Make a fruit at random location, not overlap with snake.
 	 */
 	public void makeFruit() {
 		int randomRow = (new Random()).nextInt(rows);
 		int randomCol = (new Random()).nextInt(cols);
-		//fruit couldn't overlap with snake
+		//fruit couldn't overlap with snake (body and head)
 		for(int i=0;i<this.snake.getSnakeBodyEleCoords().size();i++) {
-			if(this.snake.getSnakeBodyEleCoords().get(i).x==randomCol&&this.snake.getSnakeBodyEleCoords().get(i).y==randomRow) {
+			if((this.snake.getSnakeBodyEleCoords().get(i).x==randomCol&&this.snake.getSnakeBodyEleCoords().get(i).y==randomRow)||(this.snake.getSnakeHeadCoord().x==randomCol&&this.snake.getSnakeHeadCoord().y==randomRow)) {
 				makeFruit();
 				return;
 			}
@@ -99,24 +99,28 @@ public class Board extends Observable{
 	}
 	/**
 	 * Get the tiles of board
+	 * @return return an array of all the tiles
 	 */
 	public Tile[][] getTiles() {
 		return this.tiles;
 	}
 	/**
 	 * Get the coord of fruit
+	 * @return the fruit coordinate 
 	 */
 	public Point getFruit() {
 		return this.fruit;
 	}
 	/**
 	 * Get the rows of tiles
+	 * @return the rows
 	 */
 	public int getRows() {
 		return this.rows;
 	}
 	/**
 	 * Get the cols of tiles
+	 * @return the cols
 	 */
 	public int getCols() {
 		return this.cols;

@@ -105,7 +105,8 @@ public class Tile {
 	}
 	/**
 	 * check if there is a wall on given direction
-	 * @return ture if there is a wall, otherwise false
+	 * @param direction check if there is a wall at this direction.
+	 * @return true if there is a wall, otherwise false
 	 */
 	public boolean hasWall(Direction direction) {
 		switch(direction) {

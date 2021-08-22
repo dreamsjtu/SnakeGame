@@ -14,10 +14,6 @@ public class Snake {
 	 */
 	private List<Point> snakeBodyEleCoords = new ArrayList<>();
 	/**
-	 * Body length of current snake
-	 */
-	private int bodyLength;
-	/**
 	 * current direction of the snake
 	 */
 	private Direction currentDirection;
@@ -32,11 +28,10 @@ public class Snake {
 	 * @param bodyLength
 	 * @param direction
 	 */
-	
 	public Snake(int snakeHeadRow, int snakeHeadCol, int bodyLength,Direction direction) {
 		this.snakeHeadCoord = new Point(snakeHeadRow,snakeHeadCol);
-		this.bodyLength = bodyLength;
 		this.currentDirection = direction;
+		//make the body elements coordinates list based on the location of the head and current direction.
 		switch(direction) {
 		case Up:
 			for(int i=1;i<=bodyLength;i++) {
@@ -63,7 +58,7 @@ public class Snake {
 		}
 	}
 	/**
-	 * Set the direction of snake.
+	 * Set the current and previous direction of snake
 	 * @param direction
 	 */
 	public void setDirection(Direction direction) {
@@ -104,15 +99,16 @@ public class Snake {
 	public Direction getPreviousDirection() {
 		return previousDirection;
 	}
-
 	/**
 	 * set the coordinate of snake head
+	 * @param loc the location of the snake head
 	 */
 	public void setSnakeHeadCoord(Point loc) {
 		this.snakeHeadCoord = loc;
 	}
 	/**
 	 * return the coordinate of snake head
+	 * @return the location of the snake head
 	 */
 	public Point getSnakeHeadCoord() {
 		return this.snakeHeadCoord;

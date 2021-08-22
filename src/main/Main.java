@@ -5,14 +5,14 @@ import model.Board;
 import view.SnakeGameGUI;
 
 public class Main {
-	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
+		//create the game board, 20 rows, 20 cols, 3 is the length of the snake body.
 		Board board = new Board(20, 20, 3);
-		
+		//create the controller of the game
 		Controller control = new Controller(board);
-		SnakeGameGUI gui = new SnakeGameGUI(board,control);
-//		board.addObserver(gui);
-//		control.addObserver(gui);
+		//create the GUI for the game.
+		new SnakeGameGUI(board,control);
+		//run the game.
 		control.run();
 	}
 }
