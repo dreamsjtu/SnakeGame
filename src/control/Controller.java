@@ -4,13 +4,14 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Timer;
 
 import model.Board;
 import model.Direction;
 import model.Snake;
 
 @SuppressWarnings("deprecation")
-public class Controller extends Observable {
+public class Controller extends Observable implements Runnable{
 	private Board board;
 	private Snake snake;
 	private boolean isGameCompleted;
@@ -28,9 +29,11 @@ public class Controller extends Observable {
 		this.currentDirection = snake.getCurrentDirection();
 	}
 
+		
 	/**
 	 * Run the game, until game finished.
 	 */
+	@Override
 	public void run() {
 		this.directions.add(currentDirection);
 		while (!isGameCompleted) {
@@ -66,6 +69,7 @@ public class Controller extends Observable {
 		// game over, notify all observers , (PanelManager) to show option pane
 		setChanged();
 		notifyObservers();
+
 	}
 
 	/**
