@@ -1,2 +1,2 @@
 # SnakeGame
-A snake game written in Java
+A very simple snake game written in Java, using MVC and Observer pattern
